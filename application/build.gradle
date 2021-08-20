@@ -1,0 +1,47 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'org.springframework.boot'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation(project(":application:data"))
+  implementation(project(":application:domain"))
+  implementation(project(":application:entrypoint"))
+}
+
+subprojects {
+  apply plugin: "java-library"
+
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
+    testImplementation("org.mockito:mockito-junit-jupiter:3.1.0")
+  }
+
+  test {
+    useJUnitPlatform()
+    testLogging {
+      events "passed", "skipped", "failed"
+    }
+  }
+}

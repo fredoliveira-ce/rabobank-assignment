@@ -1,0 +1,6 @@
+rootProject.name = 'rabobank-assignment'
+include 'application'
+include 'application:domain'
+include 'application:data'
+include 'application:entrypoint'
+
