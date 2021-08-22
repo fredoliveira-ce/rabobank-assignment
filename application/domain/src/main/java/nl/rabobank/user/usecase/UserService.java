@@ -2,6 +2,7 @@ package nl.rabobank.user.usecase;
 
 import lombok.RequiredArgsConstructor;
 import nl.rabobank.user.dataprovider.UserDao;
+import nl.rabobank.user.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,4 +17,8 @@ public class UserService {
     return dao.findUser(username, password);
   }
 
+  public User getUserDetails(final String username) {
+    return dao.findByUsername(username)
+      .orElseThrow(() -> new UserNotFoundException(username));
+  }
 }
