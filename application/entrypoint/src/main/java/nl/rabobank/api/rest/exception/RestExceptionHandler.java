@@ -31,9 +31,20 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     return handleExceptionInternal(ex, request, HttpStatus.NOT_FOUND);
   }
 
+  @ExceptionHandler(value = RuntimeException.class)
+  protected ResponseEntity<Object> handleRuntime(RuntimeException ex, WebRequest request) {
+    return handleExceptionInternal(ex, request, HttpStatus.BAD_REQUEST);
+  }
+
   @Override
   protected ResponseEntity<Object> handleHttpMessageNotReadable(
       HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    return handleExceptionInternal(ex, request, HttpStatus.BAD_REQUEST);
+  }
+
+  @Override
+  protected ResponseEntity<Object> handleMethodArgumentNotValid(
+    MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
     return handleExceptionInternal(ex, request, HttpStatus.BAD_REQUEST);
   }
 
@@ -55,12 +66,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                                                     .build();
 
     return handleExceptionInternal(ex, request, HttpStatus.BAD_REQUEST, body);
-  }
-
-  @Override
-  protected ResponseEntity<Object> handleMethodArgumentNotValid(
-      MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-    return handleExceptionInternal(ex, request, HttpStatus.BAD_REQUEST);
   }
 
   private ResponseEntity<Object> handleExceptionInternal(final Exception ex, final WebRequest request,
