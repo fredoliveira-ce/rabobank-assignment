@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 @Data
 @Builder
@@ -21,7 +22,7 @@ public class User implements UserDetails {
   private String role;
 
   @Override public Collection<? extends GrantedAuthority> getAuthorities() {
-    return Collections.emptyList();
+    return Collections.unmodifiableSet(Set.of(new Authority(role)));
   }
 
   @Override public String getPassword() {
