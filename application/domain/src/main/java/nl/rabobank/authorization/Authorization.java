@@ -1,4 +1,4 @@
-package nl.rabobank.authorizations;
+package nl.rabobank.authorization;
 
 public enum Authorization {
 

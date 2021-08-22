@@ -1,4 +1,4 @@
-package nl.rabobank.authorizations;
+package nl.rabobank.authorization;
 
 import lombok.Builder;
 import lombok.Value;
@@ -8,8 +8,8 @@ import nl.rabobank.account.Account;
 @Builder(toBuilder = true)
 public class PowerOfAttorney {
 
-  String granteeName;
   String grantorName;
+  String granteeName;
   Account account;
   Authorization authorization;
 
