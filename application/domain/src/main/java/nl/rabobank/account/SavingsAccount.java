@@ -1,12 +1,19 @@
 package nl.rabobank.account;
 
+import lombok.Builder;
 import lombok.Value;
 
 @Value
+@Builder
 public class SavingsAccount implements Account {
 
-  String accountNumber;
-  String accountHolderName;
+  String number;
+  String holderName;
+  String holderDocument;
   Double balance;
 
+  @Override
+  public AccountType getType() {
+    return AccountType.SAVINGS_ACCOUNT;
+  }
 }

@@ -2,10 +2,10 @@ package nl.rabobank.account;
 
 public interface Account {
 
-  String getAccountNumber();
-
-  String getAccountHolderName();
-
+  AccountType getType();
+  String getNumber();
+  String getHolderName();
+  String getHolderDocument();
   Double getBalance();
 
 }
