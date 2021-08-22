@@ -21,7 +21,8 @@ public class PowerOfAttorneyService {
   public PowerOfAttorney save(PowerOfAttorney powerOfAttorney) {
     return accountDao.findAccount(powerOfAttorney.getAccount())
       .map(account -> dao.save(powerOfAttorney.toBuilder().account(account).build()))
-      .orElseThrow(() -> new AccountNotFoundException(powerOfAttorney.getAccount().getNumber()));
+      .orElseThrow(() -> new AccountNotFoundException(
+        powerOfAttorney.getAccount().getType(), powerOfAttorney.getAccount().getNumber()));
   }
 
   @SentrySpan
