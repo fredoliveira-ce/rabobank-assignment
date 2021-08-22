@@ -13,6 +13,9 @@ sudo apt install openjdk-16-jdk
 
 ### Run application
 ```
+docker-compose -f stack.yml up
+```
+```
 ./gradlew bootRun
 ```
 
