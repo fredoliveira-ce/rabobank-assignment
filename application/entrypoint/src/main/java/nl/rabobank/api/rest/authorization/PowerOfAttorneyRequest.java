@@ -20,15 +20,14 @@ import javax.validation.constraints.NotEmpty;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PowerOfAttorneyRequest {
 
-  @NotEmpty private String granteeName;
-  @NotEmpty private String accountNumber;
+  @NotEmpty private String granteeDocument;
   @NotEmpty private String accountType;
   @NotEmpty private String authorization;
 
-  public PowerOfAttorney toDomain(String currentUser) {
+  public PowerOfAttorney toDomain(final String grantorDocument) {
     return PowerOfAttorney.builder()
-      .grantorName(currentUser)
-      .granteeName(getGranteeName())
+      .grantorDocument(grantorDocument)
+      .granteeDocument(getGranteeDocument())
       .authorization(Authorization.valueOf(getAuthorization()))
       .account(buildAccount())
       .build();
@@ -36,14 +35,8 @@ public class PowerOfAttorneyRequest {
 
   private Account buildAccount() {
     return switch (AccountType.valueOf(getAccountType())) {
-      case PAYMENT_ACCOUNT ->
-        PaymentAccount.builder()
-          .number(getAccountNumber())
-          .build();
-      case SAVINGS_ACCOUNT ->
-        SavingsAccount.builder()
-          .number(getAccountNumber())
-          .build();
+      case PAYMENT_ACCOUNT -> PaymentAccount.builder().build();
+      case SAVINGS_ACCOUNT -> SavingsAccount.builder().build();
     };
   }
 }

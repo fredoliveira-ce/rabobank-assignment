@@ -60,3 +60,14 @@ curl --request POST \
   "grantor_name": "Mateus"
 }'
 ```
+
+### Checklist to be ready to go to production
+- [x] Being able to collect metrics.
+- [ ] Being able to monitor the application's health.
+- [x] Being able to collect and index logs.
+- [x] Has CI process to run the tests before go to the main branch.
+- [ ] Containerized application.
+- [ ] Has a pipeline to build a new release and deploy it.
+
+### TODO
+[] Encrypt password
