@@ -30,6 +30,8 @@ subprojects {
 
   dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    implementation 'io.sentry:sentry-spring-boot-starter:5.1.1'
+    api 'io.sentry:sentry:5.1.1'
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
