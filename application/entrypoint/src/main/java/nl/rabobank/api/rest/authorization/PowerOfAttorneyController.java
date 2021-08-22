@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nl.rabobank.account.usecase.Account;
 import nl.rabobank.authorization.usecase.PowerOfAttorneyService;
+import nl.rabobank.security.JwtUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +37,8 @@ public class PowerOfAttorneyController {
   @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
   public PowerOfAttorneyResponse save(@RequestBody @Valid PowerOfAttorneyRequest request) {
     log.info("Request to save a new object.");
-    return from(service.save(request.toDomain()));
+    return from(service.save(
+      request.toDomain(JwtUtils.getCurrentUser().getUsername())));
   }
 
   @GetMapping(value = "/{user}", produces = APPLICATION_JSON_VALUE)
