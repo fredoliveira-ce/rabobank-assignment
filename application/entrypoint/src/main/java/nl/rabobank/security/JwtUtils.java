@@ -2,8 +2,10 @@ package nl.rabobank.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import nl.rabobank.user.usecase.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +43,17 @@ public final class JwtUtils {
     }
 
     return authentication;
+  }
+
+  public static User getCurrentUser() {
+    var securityContext = SecurityContextHolder.getContext();
+    var authentication = securityContext.getAuthentication();
+    if (nonNull(authentication)) {
+      return User.builder()
+        .username(authentication.getPrincipal().toString())
+        .build();
+    }
+    return null;
   }
 
   private static String getUsername(final String token) {

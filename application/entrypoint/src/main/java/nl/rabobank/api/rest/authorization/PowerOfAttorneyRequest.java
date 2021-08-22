@@ -20,15 +20,14 @@ import javax.validation.constraints.NotEmpty;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PowerOfAttorneyRequest {
 
-  @NotEmpty private String grantorName;
   @NotEmpty private String granteeName;
   @NotEmpty private String accountNumber;
   @NotEmpty private String accountType;
   @NotEmpty private String authorization;
 
-  public PowerOfAttorney toDomain() {
+  public PowerOfAttorney toDomain(String currentUser) {
     return PowerOfAttorney.builder()
-      .grantorName(getGrantorName())
+      .grantorName(currentUser)
       .granteeName(getGranteeName())
       .authorization(Authorization.valueOf(getAuthorization()))
       .account(buildAccount())
