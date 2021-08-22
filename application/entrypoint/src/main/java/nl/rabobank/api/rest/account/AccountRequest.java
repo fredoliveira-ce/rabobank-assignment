@@ -34,15 +34,15 @@ public class AccountRequest {
       case PAYMENT_ACCOUNT ->
         PaymentAccount.builder()
           .number(getNumber())
-          .holderDocument(getHolderName())
-          .holderName(getHolderDocument())
+          .holderDocument(getHolderDocument())
+          .holderName(getHolderName())
           .balance(getBalance())
           .build();
       case SAVINGS_ACCOUNT ->
         SavingsAccount.builder()
           .number(getNumber())
-          .holderDocument(getHolderName())
-          .holderName(getHolderDocument())
+          .holderDocument(getHolderDocument())
+          .holderName(getHolderName())
           .balance(getBalance())
           .build();
     };
