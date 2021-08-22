@@ -19,6 +19,7 @@ public class UserEntity {
   @Indexed(unique = true)
   private String username;
   private String password;
+  private String document;
   private RoleType role;
 
 }

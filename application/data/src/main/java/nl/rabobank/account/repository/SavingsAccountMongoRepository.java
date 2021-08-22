@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface SavingsAccountMongoRepository extends MongoRepository<SavingsAccountEntity, String> {
 
-  Optional<SavingsAccountEntity> findByNumber(String number);
+  Optional<SavingsAccountEntity> findByHolderDocument(String document);
 
 }

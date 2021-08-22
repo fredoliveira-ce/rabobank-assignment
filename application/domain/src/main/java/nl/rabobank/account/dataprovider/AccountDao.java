@@ -1,6 +1,7 @@
 package nl.rabobank.account.dataprovider;
 
 import nl.rabobank.account.usecase.Account;
+import nl.rabobank.account.usecase.AccountType;
 
 import java.util.Optional;
 
@@ -8,6 +9,6 @@ public interface AccountDao {
 
   Account save(Account account);
 
-  Optional<Account> findAccount(Account account);
+  Optional<Account> findAccountByDocument(String document, AccountType type);
 
 }
