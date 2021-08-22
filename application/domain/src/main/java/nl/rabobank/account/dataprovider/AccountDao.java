@@ -1,6 +1,6 @@
 package nl.rabobank.account.dataprovider;
 
-import nl.rabobank.account.Account;
+import nl.rabobank.account.usecase.Account;
 
 import java.util.Optional;
 

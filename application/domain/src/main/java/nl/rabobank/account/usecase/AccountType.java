@@ -1,4 +1,4 @@
-package nl.rabobank.account;
+package nl.rabobank.account.usecase;
 
 public enum AccountType {
 

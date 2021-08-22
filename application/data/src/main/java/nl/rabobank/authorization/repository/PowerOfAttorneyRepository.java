@@ -1,8 +1,8 @@
 package nl.rabobank.authorization.repository;
 
 import lombok.RequiredArgsConstructor;
-import nl.rabobank.account.Account;
-import nl.rabobank.authorization.PowerOfAttorney;
+import nl.rabobank.account.usecase.Account;
+import nl.rabobank.authorization.usecase.PowerOfAttorney;
 import nl.rabobank.authorization.dataprovider.PowerOfAttorneyDao;
 import org.springframework.stereotype.Repository;
 

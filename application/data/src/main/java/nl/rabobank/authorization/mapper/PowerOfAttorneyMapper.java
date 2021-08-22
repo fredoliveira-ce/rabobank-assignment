@@ -1,7 +1,7 @@
 package nl.rabobank.authorization.mapper;
 
 import lombok.experimental.UtilityClass;
-import nl.rabobank.authorization.PowerOfAttorney;
+import nl.rabobank.authorization.usecase.PowerOfAttorney;
 import nl.rabobank.authorization.entity.PowerOfAttorneyEntity;
 
 @UtilityClass

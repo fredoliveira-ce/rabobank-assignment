@@ -5,12 +5,12 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import nl.rabobank.account.Account;
-import nl.rabobank.account.AccountType;
-import nl.rabobank.account.PaymentAccount;
-import nl.rabobank.account.SavingsAccount;
-import nl.rabobank.authorization.Authorization;
-import nl.rabobank.authorization.PowerOfAttorney;
+import nl.rabobank.account.usecase.Account;
+import nl.rabobank.account.usecase.AccountType;
+import nl.rabobank.account.usecase.PaymentAccount;
+import nl.rabobank.account.usecase.SavingsAccount;
+import nl.rabobank.authorization.usecase.Authorization;
+import nl.rabobank.authorization.usecase.PowerOfAttorney;
 
 import javax.validation.constraints.NotEmpty;
 

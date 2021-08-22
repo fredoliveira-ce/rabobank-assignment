@@ -1,8 +1,7 @@
-package nl.rabobank.account;
+package nl.rabobank.account.usecase;
 
 import lombok.RequiredArgsConstructor;
 import nl.rabobank.account.dataprovider.AccountDao;
-import nl.rabobank.authorization.PowerOfAttorney;
 import org.springframework.stereotype.Service;
 
 @Service

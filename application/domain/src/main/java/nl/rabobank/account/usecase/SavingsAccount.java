@@ -1,11 +1,11 @@
-package nl.rabobank.account;
+package nl.rabobank.account.usecase;
 
 import lombok.Builder;
 import lombok.Value;
 
 @Value
 @Builder
-public class PaymentAccount implements Account {
+public class SavingsAccount implements Account {
 
   String number;
   String holderName;
@@ -14,6 +14,6 @@ public class PaymentAccount implements Account {
 
   @Override
   public AccountType getType() {
-    return AccountType.PAYMENT_ACCOUNT;
+    return AccountType.SAVINGS_ACCOUNT;
   }
 }

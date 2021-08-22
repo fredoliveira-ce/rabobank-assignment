@@ -1,9 +1,9 @@
 package nl.rabobank.account.repository;
 
 import lombok.RequiredArgsConstructor;
-import nl.rabobank.account.Account;
-import nl.rabobank.account.PaymentAccount;
-import nl.rabobank.account.SavingsAccount;
+import nl.rabobank.account.usecase.Account;
+import nl.rabobank.account.usecase.PaymentAccount;
+import nl.rabobank.account.usecase.SavingsAccount;
 import nl.rabobank.account.dataprovider.AccountDao;
 import nl.rabobank.account.mapper.AccountMapper;
 import org.springframework.stereotype.Repository;

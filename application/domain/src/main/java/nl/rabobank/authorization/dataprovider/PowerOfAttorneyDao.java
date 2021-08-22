@@ -1,7 +1,7 @@
 package nl.rabobank.authorization.dataprovider;
 
-import nl.rabobank.account.Account;
-import nl.rabobank.authorization.PowerOfAttorney;
+import nl.rabobank.account.usecase.Account;
+import nl.rabobank.authorization.usecase.PowerOfAttorney;
 
 import java.util.List;
 

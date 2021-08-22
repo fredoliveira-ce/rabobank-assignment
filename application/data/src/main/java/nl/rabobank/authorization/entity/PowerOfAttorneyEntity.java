@@ -2,8 +2,8 @@ package nl.rabobank.authorization.entity;
 
 import lombok.Builder;
 import lombok.Data;
-import nl.rabobank.account.Account;
-import nl.rabobank.authorization.Authorization;
+import nl.rabobank.account.usecase.Account;
+import nl.rabobank.authorization.usecase.Authorization;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -20,6 +20,7 @@ public class PowerOfAttorneyEntity {
   @Indexed(unique = true)
   private String granteeName;
   private String grantorName;
+  //@DBRef
   private Account account;
   private Authorization authorization;
 
