@@ -8,6 +8,7 @@ public final class UserMock {
     return User.builder()
       .username("user-test")
       .password("pwd")
+      .document("523490")
       .role("USER")
       .build();
   }

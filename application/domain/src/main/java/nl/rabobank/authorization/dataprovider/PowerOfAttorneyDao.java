@@ -1,5 +1,6 @@
 package nl.rabobank.authorization.dataprovider;
 
+import nl.rabobank.authorization.usecase.Authorization;
 import nl.rabobank.authorization.usecase.PowerOfAttorney;
 
 import java.util.List;
@@ -11,5 +12,5 @@ public interface PowerOfAttorneyDao {
 
   List<PowerOfAttorney> findByGranteeDocument(String document);
 
-  Optional<PowerOfAttorney> findBy(String granteeDocument, String grantorDocument, String authorization);
+  Optional<PowerOfAttorney> findBy(String granteeDocument, String grantorDocument, Authorization authorization);
 }

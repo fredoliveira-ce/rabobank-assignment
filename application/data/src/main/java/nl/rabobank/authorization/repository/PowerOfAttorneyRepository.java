@@ -33,10 +33,12 @@ public class PowerOfAttorneyRepository implements PowerOfAttorneyDao {
   }
 
   @Override
-  public Optional<PowerOfAttorney> findBy(final String granteeDocument, final String grantorDocument, final String authorization) {
+  public Optional<PowerOfAttorney> findBy(
+    final String granteeDocument, final String grantorDocument, final Authorization authorization
+  ) {
     return mongoRepository
       .findByGranteeDocumentAndGrantorDocumentAndAuthorization(
-        granteeDocument, grantorDocument, Authorization.valueOf(authorization))
+        granteeDocument, grantorDocument, authorization)
       .map(PowerOfAttorneyMapper::from);
   }
 }

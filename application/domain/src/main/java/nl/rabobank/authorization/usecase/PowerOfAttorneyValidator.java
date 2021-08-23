@@ -17,7 +17,7 @@ public class PowerOfAttorneyValidator {
   private final UserService userService;
 
   public User validate(
-    final String granteeDocument, final String grantor, final String authorization
+    final String granteeDocument, final String grantor, final Authorization authorization
   ) {
     var user = validateSelfPowerOfAttorney(granteeDocument, grantor);
     validateDuplicatedPowerOfAttorney(granteeDocument, authorization, user);
@@ -27,7 +27,7 @@ public class PowerOfAttorneyValidator {
   }
 
   private void validateDuplicatedPowerOfAttorney(
-    final String granteeDocument, final String authorization, final User user
+    final String granteeDocument, final Authorization authorization, final User user
   ) {
     dao.findBy(granteeDocument, user.getDocument(), authorization)
       .ifPresent(powerOfAttorney -> {

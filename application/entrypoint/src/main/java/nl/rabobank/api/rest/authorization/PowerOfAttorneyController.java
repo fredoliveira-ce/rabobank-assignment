@@ -1,8 +1,8 @@
 package nl.rabobank.api.rest.authorization;
 
-import io.sentry.spring.tracing.SentryTransaction;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import nl.rabobank.authorization.usecase.Authorization;
 import nl.rabobank.authorization.usecase.PowerOfAttorneyService;
 import nl.rabobank.authorization.usecase.PowerOfAttorneyValidator;
 import nl.rabobank.security.JwtUtils;
@@ -33,7 +33,6 @@ public class PowerOfAttorneyController {
   private final PowerOfAttorneyService service;
   private final PowerOfAttorneyValidator validator;
 
-  @SentryTransaction(operation = "save")
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping(value = "/authorize", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
   public PowerOfAttorneyResponse save(@RequestBody @Valid final PowerOfAttorneyRequest request) {
@@ -41,16 +40,14 @@ public class PowerOfAttorneyController {
     var user = validator.validate(
       request.getGranteeDocument(),
       JwtUtils.getCurrentUser().getUsername(),
-      request.getAuthorization()
+      Authorization.valueOf(request.getAuthorization())
     );
+
     return from(service.save(request.toDomain(user.getDocument())));
   }
 
-  @SentryTransaction(operation = "findAuthorizedAccounts")
   @GetMapping(produces = APPLICATION_JSON_VALUE)
   public ResponseEntity<List<PowerOfAttorneyResponse>> findAuthorizedAccounts() {
-    log.debug("Request to get account access: {}.", JwtUtils.getCurrentUser().getUsername());
-
     var permissions = service.find(JwtUtils.getCurrentUser().getUsername()).stream()
       .map(PowerOfAttorneyResponse::from)
       .collect(Collectors.toList());

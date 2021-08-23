@@ -7,8 +7,8 @@ public final class PowerOfAttorneyMock {
 
   public static PowerOfAttorney getOne() {
     return PowerOfAttorney.builder()
-      .grantorDocument("12341234")
-      .granteeDocument("")
+      .grantorDocument("432141")
+      .granteeDocument("123412")
       .account(AccountMock.getOneSavingsAccount())
       .authorization(Authorization.READ)
       .build();
