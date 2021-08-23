@@ -70,4 +70,5 @@ curl --request POST \
 - [ ] Has a pipeline to build a new release and deploy it.
 
 ### TODO
-[] Encrypt password
+- [ ] Encrypt password
+- [ ] Generate account number and not allow replacing with spring saveOrUpdate

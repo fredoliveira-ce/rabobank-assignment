@@ -22,4 +22,9 @@ public class UserRepository implements UserDao {
   public Optional<User> findByUsername(final String username) {
     return mongoRepository.findByUsername(username);
   }
+
+  @Override
+  public Optional<User> findByDocument(final String document) {
+    return mongoRepository.findByDocument(document);
+  }
 }

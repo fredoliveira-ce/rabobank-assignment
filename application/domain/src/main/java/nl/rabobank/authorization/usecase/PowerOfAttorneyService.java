@@ -2,7 +2,6 @@ package nl.rabobank.authorization.usecase;
 
 import io.sentry.spring.tracing.SentrySpan;
 import lombok.RequiredArgsConstructor;
-import nl.rabobank.account.usecase.Account;
 import nl.rabobank.account.dataprovider.AccountDao;
 import nl.rabobank.account.exception.AccountNotFoundException;
 import nl.rabobank.authorization.dataprovider.PowerOfAttorneyDao;
@@ -24,17 +23,18 @@ public class PowerOfAttorneyService {
   @SentrySpan
   public PowerOfAttorney save(PowerOfAttorney powerOfAttorney) {
     return accountDao.findAccountByDocument(
-        powerOfAttorney.getGranteeDocument(), powerOfAttorney.getAccount().getType())
+        powerOfAttorney.getGrantorDocument(), powerOfAttorney.getAccount().getType())
       .map(account -> dao.save(powerOfAttorney.toBuilder()
         .account(account)
         .build()))
       .orElseThrow(() -> new AccountNotFoundException(
-        powerOfAttorney.getGranteeDocument(), powerOfAttorney.getAccount().getType()));
+        powerOfAttorney.getGrantorDocument(), powerOfAttorney.getAccount().getType()));
   }
 
   @SentrySpan
-  public List<Account> find(String user) {
-    return dao.find(user);
+  public List<PowerOfAttorney> find(String username) {
+    var user = userService.getUserDetails(username);
+    return dao.findByGranteeDocument(user.getDocument());
   }
 
   public User validate(final String granteeDocument, final String username) {

@@ -9,4 +9,6 @@ public interface UserDao {
   Optional<User> findUser(String username, String password);
 
   Optional<User> findByUsername(String username);
+
+  Optional<User> findByDocument(String document);
 }

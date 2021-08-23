@@ -25,14 +25,13 @@ public class AccountRepository implements AccountDao {
   public Account save(Account account) {
     return switch (account.getType()) {
       case PAYMENT_ACCOUNT -> AccountMapper.from(
-        savingsAccountMongoRepository.save(
-          requireNonNull(toEntity((SavingsAccount) account)))
-      );
-      case SAVINGS_ACCOUNT -> AccountMapper.from(
         paymentAccountMongoRepository.save(
           requireNonNull(toEntity((PaymentAccount) account)))
       );
-
+      case SAVINGS_ACCOUNT -> AccountMapper.from(
+        savingsAccountMongoRepository.save(
+          requireNonNull(toEntity((SavingsAccount) account)))
+      );
     };
   }
 

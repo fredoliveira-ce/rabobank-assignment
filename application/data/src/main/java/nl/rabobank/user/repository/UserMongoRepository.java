@@ -12,4 +12,6 @@ public interface UserMongoRepository extends MongoRepository<UserEntity, ObjectI
   Optional<User> findByUsernameAndPassword(String username, String password);
 
   Optional<User> findByUsername(String username);
+
+  Optional<User> findByDocument(String document);
 }

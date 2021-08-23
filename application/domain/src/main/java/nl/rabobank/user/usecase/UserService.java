@@ -21,4 +21,8 @@ public class UserService {
     return dao.findByUsername(username)
       .orElseThrow(() -> new UserNotFoundException(username));
   }
+
+  public Optional<User> findByDocument(final String document) {
+    return dao.findByDocument(document);
+  }
 }
