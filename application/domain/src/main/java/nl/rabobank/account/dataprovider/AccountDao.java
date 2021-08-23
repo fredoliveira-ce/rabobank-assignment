@@ -9,6 +9,6 @@ public interface AccountDao {
 
   Account save(Account account);
 
-  Optional<Account> findAccountByDocument(String document, AccountType type);
+  Optional<Account> findBy(String document, AccountType type);
 
 }

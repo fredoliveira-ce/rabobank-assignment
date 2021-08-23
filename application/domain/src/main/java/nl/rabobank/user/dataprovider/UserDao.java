@@ -6,9 +6,9 @@ import java.util.Optional;
 
 public interface UserDao {
 
-  Optional<User> findUser(String username, String password);
+  Optional<User> findBy(String username, String password);
 
-  Optional<User> findByUsername(String username);
+  Optional<User> findBy(String username);
 
   Optional<User> findByDocument(String document);
 }

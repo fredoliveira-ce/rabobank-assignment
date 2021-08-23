@@ -13,12 +13,13 @@ public class AccountService {
   private final AccountDao dao;
   private final UserService userService;
 
-  public Account save(Account account) {
+  public Account save(final Account account) {
     return dao.save(account);
   }
 
-  public void validate(String holderDocument) {
-    userService.findByDocument(holderDocument)
-      .orElseThrow(() -> new AccountWithoutRegisterException(holderDocument));
+  public void validate(final String holderDocument) {
+    if (userService.findByDocument(holderDocument).isEmpty()) {
+      throw new AccountWithoutRegisterException(holderDocument);
+    }
   }
 }

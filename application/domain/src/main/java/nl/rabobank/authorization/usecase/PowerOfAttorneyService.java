@@ -20,8 +20,9 @@ public class PowerOfAttorneyService {
 
   @SentrySpan
   public PowerOfAttorney save(final PowerOfAttorney powerOfAttorney) {
-    return accountDao.findAccountByDocument(
-        powerOfAttorney.getGrantorDocument(), powerOfAttorney.getAccount().getType())
+    return accountDao.findBy(
+        powerOfAttorney.getGrantorDocument(),
+        powerOfAttorney.getAccount().getType())
       .map(account -> dao.save(powerOfAttorney.toBuilder()
         .account(account)
         .build()))
@@ -31,7 +32,7 @@ public class PowerOfAttorneyService {
 
   @SentrySpan
   public List<PowerOfAttorney> find(final String username) {
-    var user = userService.getUserDetails(username);
+    var user = userService.find(username);
     return dao.findByGranteeDocument(user.getDocument());
   }
 

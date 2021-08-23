@@ -13,12 +13,12 @@ public class UserService {
 
   private final UserDao dao;
 
-  public Optional<User> findUser(final String username, final String password) {
-    return dao.findUser(username, password);
+  public Optional<User> find(final String username, final String password) {
+    return dao.findBy(username, password);
   }
 
-  public User getUserDetails(final String username) {
-    return dao.findByUsername(username)
+  public User find(final String username) {
+    return dao.findBy(username)
       .orElseThrow(() -> new UserNotFoundException(username));
   }
 

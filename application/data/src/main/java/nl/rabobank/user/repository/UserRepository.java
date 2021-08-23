@@ -14,12 +14,12 @@ public class UserRepository implements UserDao {
   private final UserMongoRepository mongoRepository;
 
   @Override
-  public Optional<User> findUser(final String username, final String password) {
+  public Optional<User> findBy(final String username, final String password) {
     return mongoRepository.findByUsernameAndPassword(username, password);
   }
 
   @Override
-  public Optional<User> findByUsername(final String username) {
+  public Optional<User> findBy(final String username) {
     return mongoRepository.findByUsername(username);
   }
 
@@ -27,4 +27,5 @@ public class UserRepository implements UserDao {
   public Optional<User> findByDocument(final String document) {
     return mongoRepository.findByDocument(document);
   }
+
 }

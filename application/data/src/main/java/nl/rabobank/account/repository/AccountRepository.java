@@ -22,7 +22,7 @@ public class AccountRepository implements AccountDao {
   private final PaymentAccountMongoRepository paymentAccountMongoRepository;
 
   @Override
-  public Account save(Account account) {
+  public Account save(final Account account) {
     return switch (account.getType()) {
       case PAYMENT_ACCOUNT -> AccountMapper.from(
         paymentAccountMongoRepository.save(
@@ -36,7 +36,7 @@ public class AccountRepository implements AccountDao {
   }
 
   @Override
-  public Optional<Account> findAccountByDocument(String document, AccountType type) {
+  public Optional<Account> findBy(final String document, final AccountType type) {
     return switch (type) {
       case PAYMENT_ACCOUNT ->
         paymentAccountMongoRepository.findByHolderDocument(document)

@@ -36,7 +36,7 @@ public class PowerOfAttorneyValidator {
   }
 
   private User validateSelfPowerOfAttorney(final String granteeDocument, final String grantor) {
-    var user = userService.getUserDetails(grantor);
+    var user = userService.find(grantor);
 
     if (granteeDocument.equals(user.getDocument())) {
       throw new SelfPowerOfAttorneyNotAllowedException(granteeDocument);
@@ -44,7 +44,7 @@ public class PowerOfAttorneyValidator {
     return user;
   }
 
-  private void validateGranteeRegistration(String granteeDocument) {
+  private void validateGranteeRegistration(final String granteeDocument) {
     if (userService.findByDocument(granteeDocument).isEmpty()) {
       throw new AccountWithoutRegisterException(granteeDocument);
     }

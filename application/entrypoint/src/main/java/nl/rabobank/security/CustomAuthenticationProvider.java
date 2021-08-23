@@ -26,7 +26,7 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
     final String username,
     final UsernamePasswordAuthenticationToken authentication
   ) throws AuthenticationException {
-    return service.findUser(username, authentication.getCredentials().toString())
+    return service.find(username, authentication.getCredentials().toString())
       .orElseThrow(() -> new UserUnauthorizedException(username));
   }
 
