@@ -61,7 +61,7 @@ class PowerOfAttorneyServiceTest {
     );
 
     assertTrue(exception.getMessage()
-      .contains("Account with type SAVINGS_ACCOUNT and document '12341234' not found."));
+      .contains("Account with type SAVINGS_ACCOUNT and document '432141' not found."));
   }
 
   @Test
