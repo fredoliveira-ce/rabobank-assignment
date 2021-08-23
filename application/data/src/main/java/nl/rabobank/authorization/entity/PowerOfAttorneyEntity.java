@@ -16,9 +16,10 @@ public class PowerOfAttorneyEntity {
 
   @Id
   private ObjectId id;
-  private String grantorName;
   @Indexed(unique = true)
-  private String granteeName;
+  private String grantorDocument;
+  @Indexed(unique = true)
+  private String granteeDocument;
   private Account account;
   private Authorization authorization;
 

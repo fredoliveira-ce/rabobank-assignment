@@ -9,8 +9,8 @@ public class PowerOfAttorneyMapper {
 
   public static PowerOfAttorneyEntity toEntity(PowerOfAttorney powerOfAttorney) {
     return PowerOfAttorneyEntity.builder()
-      .granteeName(powerOfAttorney.getGranteeName())
-      .grantorName(powerOfAttorney.getGrantorName())
+      .granteeDocument(powerOfAttorney.getGranteeDocument())
+      .grantorDocument(powerOfAttorney.getGrantorDocument())
       .authorization(powerOfAttorney.getAuthorization())
       .account(powerOfAttorney.getAccount())
       .build();
@@ -18,8 +18,8 @@ public class PowerOfAttorneyMapper {
 
   public static PowerOfAttorney from(PowerOfAttorneyEntity entity) {
     return PowerOfAttorney.builder()
-      .granteeName(entity.getGranteeName())
-      .grantorName(entity.getGrantorName())
+      .granteeDocument(entity.getGranteeDocument())
+      .grantorDocument(entity.getGrantorDocument())
       .authorization(entity.getAuthorization())
       .account(entity.getAccount())
       .build();

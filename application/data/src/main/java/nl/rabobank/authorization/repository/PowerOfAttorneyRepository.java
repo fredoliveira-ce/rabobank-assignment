@@ -1,12 +1,13 @@
 package nl.rabobank.authorization.repository;
 
 import lombok.RequiredArgsConstructor;
-import nl.rabobank.account.usecase.Account;
-import nl.rabobank.authorization.usecase.PowerOfAttorney;
 import nl.rabobank.authorization.dataprovider.PowerOfAttorneyDao;
+import nl.rabobank.authorization.mapper.PowerOfAttorneyMapper;
+import nl.rabobank.authorization.usecase.PowerOfAttorney;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static nl.rabobank.authorization.mapper.PowerOfAttorneyMapper.from;
 import static nl.rabobank.authorization.mapper.PowerOfAttorneyMapper.toEntity;
@@ -23,7 +24,9 @@ public class PowerOfAttorneyRepository implements PowerOfAttorneyDao {
   }
 
   @Override
-  public List<Account> find(String user) {
-    return List.of();
+  public List<PowerOfAttorney> findByGranteeDocument(String document) {
+    return mongoRepository.findByGranteeDocument(document).stream()
+      .map(PowerOfAttorneyMapper::from)
+      .collect(Collectors.toList());
   }
 }

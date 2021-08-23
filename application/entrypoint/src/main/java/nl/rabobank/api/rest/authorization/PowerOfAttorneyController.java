@@ -3,14 +3,11 @@ package nl.rabobank.api.rest.authorization;
 import io.sentry.spring.tracing.SentryTransaction;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nl.rabobank.account.usecase.Account;
 import nl.rabobank.authorization.usecase.PowerOfAttorneyService;
 import nl.rabobank.security.JwtUtils;
-import nl.rabobank.user.usecase.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static nl.rabobank.api.rest.authorization.PowerOfAttorneyResponse.from;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -38,19 +36,21 @@ public class PowerOfAttorneyController {
   @PostMapping(value = "/authorize", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
   public PowerOfAttorneyResponse save(@RequestBody @Valid final PowerOfAttorneyRequest request) {
     log.info("Request to save a new object.");
-    User user = service.validate(request.getGranteeDocument(), JwtUtils.getCurrentUser().getUsername());
+    var user = service.validate(request.getGranteeDocument(), JwtUtils.getCurrentUser().getUsername());
     return from(service.save(request.toDomain(user.getDocument())));
   }
 
-  @GetMapping(value = "/{user}", produces = APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<Account>> find(@PathVariable final String user) {
-    log.debug("Request to get account access: {}.", user);
+  @GetMapping(produces = APPLICATION_JSON_VALUE)
+  public ResponseEntity<List<PowerOfAttorneyResponse>> findAuthorizedAccounts() {
+    log.debug("Request to get account access: {}.", JwtUtils.getCurrentUser().getUsername());
 
-    List<Account> accounts = service.find(user);
+    var permissions = service.find(JwtUtils.getCurrentUser().getUsername()).stream()
+      .map(PowerOfAttorneyResponse::from)
+      .collect(Collectors.toList());
 
-    return accounts.isEmpty()
+    return permissions.isEmpty()
       ? notFound().build()
-      : ok().body(accounts);
+      : ok().body(permissions);
   }
 
 }
