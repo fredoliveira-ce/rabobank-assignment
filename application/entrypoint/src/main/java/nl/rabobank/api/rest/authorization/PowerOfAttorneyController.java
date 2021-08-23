@@ -4,6 +4,7 @@ import io.sentry.spring.tracing.SentryTransaction;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nl.rabobank.authorization.usecase.PowerOfAttorneyService;
+import nl.rabobank.authorization.usecase.PowerOfAttorneyValidator;
 import nl.rabobank.security.JwtUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,16 +31,22 @@ import static org.springframework.http.ResponseEntity.ok;
 public class PowerOfAttorneyController {
 
   private final PowerOfAttorneyService service;
+  private final PowerOfAttorneyValidator validator;
 
-  @SentryTransaction(operation = "save-power-of-attorney")
+  @SentryTransaction(operation = "save")
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping(value = "/authorize", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
   public PowerOfAttorneyResponse save(@RequestBody @Valid final PowerOfAttorneyRequest request) {
-    log.info("Request to save a new object.");
-    var user = service.validate(request.getGranteeDocument(), JwtUtils.getCurrentUser().getUsername());
+    log.info("Request to save a new power of attorney.");
+    var user = validator.validate(
+      request.getGranteeDocument(),
+      JwtUtils.getCurrentUser().getUsername(),
+      request.getAuthorization()
+    );
     return from(service.save(request.toDomain(user.getDocument())));
   }
 
+  @SentryTransaction(operation = "findAuthorizedAccounts")
   @GetMapping(produces = APPLICATION_JSON_VALUE)
   public ResponseEntity<List<PowerOfAttorneyResponse>> findAuthorizedAccounts() {
     log.debug("Request to get account access: {}.", JwtUtils.getCurrentUser().getUsername());
