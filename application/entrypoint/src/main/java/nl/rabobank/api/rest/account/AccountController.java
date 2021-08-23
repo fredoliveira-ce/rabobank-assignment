@@ -26,7 +26,7 @@ public class AccountController {
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
   public AccountResponse save(@RequestBody @Valid AccountRequest request) {
-    log.info("Request to save a new object.");
+    log.info("Request to save a new account.");
     service.validate(request.getHolderDocument());
     return from(service.save(request.toDomain()));
   }

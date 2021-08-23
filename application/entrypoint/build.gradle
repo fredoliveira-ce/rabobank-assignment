@@ -1,6 +1,6 @@
 dependencies {
-  api(project(":application:domain"))
-  api "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+  implementation(project(":application:domain"))
+  implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
   api "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
   api "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
   api "org.springframework.boot:spring-boot-starter-security:${springBootVersion}"
@@ -8,8 +8,8 @@ dependencies {
   api "io.jsonwebtoken:jjwt:${jwtVersion}"
   api 'javax.xml.bind:jaxb-api:2.1'
 
-  api "io.springfox:springfox-swagger2:${swaggerVersion}"
-  api "io.springfox:springfox-swagger-ui:${swaggerVersion}"
+  implementation "io.springfox:springfox-swagger2:${swaggerVersion}"
+  implementation "io.springfox:springfox-swagger-ui:${swaggerVersion}"
 
   api 'com.newrelic.telemetry:micrometer-registry-new-relic:0.7.0'
   api 'io.micrometer:micrometer-core:1.6.4'

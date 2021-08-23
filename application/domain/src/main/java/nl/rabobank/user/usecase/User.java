@@ -1,5 +1,6 @@
 package nl.rabobank.user.usecase;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,9 +8,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
+import java.util.HashSet;
 
 @Data
 @Builder
@@ -22,8 +23,9 @@ public class User implements UserDetails {
   private String document;
   private String role;
 
+  @JsonDeserialize(contentAs=Authority.class)
   @Override public Collection<? extends GrantedAuthority> getAuthorities() {
-    return Collections.unmodifiableSet(Set.of(new Authority(role)));
+    return new HashSet<>(Arrays.asList(new Authority(role)));
   }
 
   @Override public String getPassword() {
