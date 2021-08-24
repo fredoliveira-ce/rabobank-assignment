@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabobank-assignment-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rabobank-assignment
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: rabobank-assignment
+    spec:
+      containers:
+        - name: rabobank-assignment
+          image: fredoliveirace/rabobank-assignment:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
