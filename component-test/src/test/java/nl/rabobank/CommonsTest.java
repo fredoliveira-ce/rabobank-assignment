@@ -16,6 +16,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @ComponentTest
 public class CommonsTest {
 
+  public static final String DEFAULT_PASSWORD = "pwd";
+  public static final String DEFAULT_USER = "user4test";
+
   @LocalServerPort
   private int port;
 
@@ -56,17 +59,25 @@ public class CommonsTest {
       .port(port)
       .urlEncodingEnabled(false)
       .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-      .body(User.builder().username(username).password("pwd").build())
+      .body(User.builder().username(username).password(DEFAULT_PASSWORD).build())
       .post("/login")
       .getHeader("Authorization");
   }
 
-  public void createUser() {
+  public void createDefaultUser() {
     mongoRepository.deleteAll();
     mongoRepository.save(UserEntity.builder()
       .document("000111222")
-      .username("user4test")
-      .password("pwd")
+      .username(DEFAULT_USER)
+      .password(DEFAULT_PASSWORD)
+      .build());
+  }
+
+  public void createUser(String username, String userDocument) {
+    mongoRepository.save(UserEntity.builder()
+      .document(userDocument)
+      .username(username)
+      .password(DEFAULT_PASSWORD)
       .build());
   }
 

@@ -24,9 +24,9 @@ public class AccountControllerComponentTest extends CommonsTest {
     @DisplayName("should save a new account")
     void saveNewAccount() {
       // arrange
-      createUser();
+      createDefaultUser();
       var token = doLogin("user4test");
-      var request = AccountRequestTemplate.getOne();
+      var request = AccountRequestTemplate.getOneSavingsAccount();
 
       // act
       var response = doPost(API_PATH, request, token);
@@ -45,9 +45,9 @@ public class AccountControllerComponentTest extends CommonsTest {
     @DisplayName("should throw and exception when there is no user registered to hold an account")
     void throwValidationException() {
       // arrange
-      createUser();
+      createDefaultUser();
       var token = doLogin("user4test");
-      var request = AccountRequestTemplate.getOne();
+      var request = AccountRequestTemplate.getOneSavingsAccount();
       request.setHolderDocument("0000000");
 
       // act

@@ -14,12 +14,14 @@ import nl.rabobank.authorization.usecase.PowerOfAttorney;
 public class PowerOfAttorneyResponse {
 
   private String grantorDocument;
+  private String granteeDocument;
   private Account account;
   private Authorization authorization;
 
-  public static PowerOfAttorneyResponse from(PowerOfAttorney powerOfAttorney) {
+  public static PowerOfAttorneyResponse from(final PowerOfAttorney powerOfAttorney) {
     return PowerOfAttorneyResponse.builder()
       .grantorDocument(powerOfAttorney.getGrantorDocument())
+      .granteeDocument(powerOfAttorney.getGranteeDocument())
       .account(powerOfAttorney.getAccount())
       .authorization(powerOfAttorney.getAuthorization())
       .build();
