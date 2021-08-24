@@ -40,6 +40,26 @@ public class AccountControllerComponentTest extends CommonsTest {
         .body("holder_name", is(request.getHolderName()))
         .body("holder_document", is(request.getHolderDocument()));
     }
+
+    @Test
+    @DisplayName("should throw and exception when there is no user registered to hold an account")
+    void throwValidationException() {
+      // arrange
+      createUser();
+      var token = doLogin("user4test");
+      var request = AccountRequestTemplate.getOne();
+      request.setHolderDocument("0000000");
+
+      // act
+      var response = doPost(API_PATH, request, token);
+
+      // assert
+      response
+        .assertThat()
+        .statusCode(HttpStatus.NOT_FOUND.value())
+        .body("message", is("AccountWithoutRegisterException"))
+        .body("description", is("Registration for account with document 0000000 not found."));
+    }
   }
 
 }
