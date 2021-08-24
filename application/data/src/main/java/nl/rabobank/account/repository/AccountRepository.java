@@ -2,6 +2,7 @@ package nl.rabobank.account.repository;
 
 import lombok.RequiredArgsConstructor;
 import nl.rabobank.account.dataprovider.AccountDao;
+import nl.rabobank.account.repository.strategy.AccountStrategy;
 import nl.rabobank.account.usecase.Account;
 import nl.rabobank.account.usecase.AccountType;
 import org.springframework.context.annotation.Primary;

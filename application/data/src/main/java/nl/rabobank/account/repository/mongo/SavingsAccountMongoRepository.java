@@ -1,4 +1,4 @@
-package nl.rabobank.account.repository;
+package nl.rabobank.account.repository.mongo;
 
 import nl.rabobank.account.entity.SavingsAccountEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;

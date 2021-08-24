@@ -1,4 +1,4 @@
-package nl.rabobank.account.repository;
+package nl.rabobank.account.repository.strategy;
 
 import lombok.RequiredArgsConstructor;
 import nl.rabobank.account.usecase.AccountType;

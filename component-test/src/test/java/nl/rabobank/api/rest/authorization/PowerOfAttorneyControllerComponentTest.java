@@ -2,7 +2,7 @@ package nl.rabobank.api.rest.authorization;
 
 import nl.rabobank.CommonsTest;
 import nl.rabobank.ComponentTest;
-import nl.rabobank.account.repository.SavingsAccountMongoRepository;
+import nl.rabobank.account.repository.mongo.SavingsAccountMongoRepository;
 import nl.rabobank.authorization.dataprovider.PowerOfAttorneyDao;
 import nl.rabobank.authorization.repository.PowerOfAttorneyMongoRepository;
 import nl.rabobank.template.AccountRequestTemplate;
