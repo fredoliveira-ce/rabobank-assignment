@@ -3,4 +3,5 @@ include 'application'
 include 'application:domain'
 include 'application:data'
 include 'application:entrypoint'
+include 'component-test'
 

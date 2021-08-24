@@ -1,0 +1,40 @@
+plugins {
+  id 'application'
+  id 'com.sourcemuse.mongo' version '1.0.7'
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation(project(":application"))
+  implementation(project(":application:domain"))
+  implementation(project(":application:data"))
+  implementation(project(":application:entrypoint"))
+
+  implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+  implementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}") {
+    exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+  }
+  implementation "io.rest-assured:rest-assured:${restAssured}"
+
+}
+
+task componentTest(type: Test) {
+  include '**/*ComponentTest.class'
+  failFast = true
+  outputs.upToDateWhen { false }
+  useJUnitPlatform()
+  testLogging {
+    events "passed", "skipped", "failed"
+  }
+  runWithMongoDb = true
+}
+
+mongo {
+  port 12345
+  logging 'console'
+  mongoVersion 'PRODUCTION'
+  auth false
+}

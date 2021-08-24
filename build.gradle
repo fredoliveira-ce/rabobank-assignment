@@ -4,4 +4,5 @@ ext {
   h2Version = '1.4.200'
   swaggerVersion = '2.9.2'
   jwtVersion = '0.9.1'
+  restAssured = '4.4.0'
 }
