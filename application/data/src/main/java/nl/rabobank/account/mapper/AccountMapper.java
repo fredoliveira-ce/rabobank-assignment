@@ -1,11 +1,11 @@
 package nl.rabobank.account.mapper;
 
 import lombok.experimental.UtilityClass;
+import nl.rabobank.account.entity.PaymentAccountEntity;
+import nl.rabobank.account.entity.SavingsAccountEntity;
 import nl.rabobank.account.usecase.Account;
 import nl.rabobank.account.usecase.PaymentAccount;
 import nl.rabobank.account.usecase.SavingsAccount;
-import nl.rabobank.account.entity.PaymentAccountEntity;
-import nl.rabobank.account.entity.SavingsAccountEntity;
 
 @UtilityClass
 public class AccountMapper {

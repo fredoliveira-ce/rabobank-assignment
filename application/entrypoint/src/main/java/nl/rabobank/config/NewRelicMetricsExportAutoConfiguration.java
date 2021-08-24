@@ -1,14 +1,10 @@
 package nl.rabobank.config;
 
 import com.newrelic.telemetry.Attributes;
-import io.micrometer.core.instrument.config.MeterFilter;
-import io.micrometer.core.instrument.util.NamedThreadFactory;
 import com.newrelic.telemetry.micrometer.NewRelicRegistry;
 import com.newrelic.telemetry.micrometer.NewRelicRegistryConfig;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.time.Duration;
-
+import io.micrometer.core.instrument.config.MeterFilter;
+import io.micrometer.core.instrument.util.NamedThreadFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.metrics.CompositeMeterRegistryAutoConfiguration;
 import org.springframework.boot.actuate.autoconfigure.metrics.MetricsAutoConfiguration;
@@ -19,6 +15,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.time.Duration;
 
 @Profile("!test")
 @Configuration
