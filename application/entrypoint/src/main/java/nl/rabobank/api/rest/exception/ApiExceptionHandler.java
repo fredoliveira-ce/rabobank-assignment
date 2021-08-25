@@ -19,7 +19,7 @@ import java.security.InvalidParameterException;
 
 @Slf4j
 @ControllerAdvice
-public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(value = InvalidParameterException.class)
   protected ResponseEntity<Object> handleInvalidParameter(InvalidParameterException ex, WebRequest request) {
@@ -52,14 +52,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
   protected ResponseEntity<Object> handleTypeMismatch(
       TypeMismatchException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-    final String description =
+    final var description =
         String.format("'%s' is not a valid value for %s of type %s",
             ex.getValue(),
             getPropertyName(ex),
             getType(ex)
         );
 
-    final RestExceptionBody body = RestExceptionBody.builder()
+    final ApiExceptionBody body = ApiExceptionBody.builder()
                                                     .message(ex.getClass()
                                                                .getSimpleName())
                                                     .description(description)
@@ -70,7 +70,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
   private ResponseEntity<Object> handleExceptionInternal(final Exception ex, final WebRequest request,
       final HttpStatus status) {
-    final RestExceptionBody body = RestExceptionBody.builder()
+    final ApiExceptionBody body = ApiExceptionBody.builder()
                                                     .message(ex.getClass()
                                                                .getSimpleName())
                                                     .description(ex.getMessage())
@@ -79,7 +79,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
   }
 
   private ResponseEntity<Object> handleExceptionInternal(final Exception ex, final WebRequest request,
-      final HttpStatus status, final RestExceptionBody body) {
+      final HttpStatus status, final ApiExceptionBody body) {
     Sentry.captureException(ex);
     log.error("status=error, error={}", ex.getMessage(), ex);
     return handleExceptionInternal(ex, body, new HttpHeaders(), status, request);

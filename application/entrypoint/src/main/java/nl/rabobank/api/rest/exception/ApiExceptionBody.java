@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class RestExceptionBody {
+public class ApiExceptionBody {
 
   private String message;
 
