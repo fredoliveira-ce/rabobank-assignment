@@ -3,20 +3,20 @@
 
 ### Building the project
 1. Setup JDK 16
-```bash
+```shell script
 sudo apt install openjdk-16-jdk
 ```
 
 2. Build and run tests
-```bash
+```shell script
 ./gradlew clean build componentTest
 ```
 
 ### Run application
-```
+```shell script
 docker-compose -f stack.yml up
 ```
-```
+```shell script
 ./gradlew bootRun
 ```
 
@@ -24,21 +24,24 @@ docker-compose -f stack.yml up
 http://localhost:8080/swagger-ui.html
 
 ## Instructions
- 1- Request token
-```
+<i class="fab fa-exclamation-triangle fa-fw" style="color:rgb(252,109,38); font-size:.85em" aria-hidden="true"></i>
+The user service would be implemented in other service, so there is an initial load in mongo-init/init.js. Check it out!
+
+ 1- Request a token
+```shell script
 curl --request POST \
   --url http://localhost:8080/login \
   --header 'content-type: application/json' \
   --data '{
-	"username": "peggy.burns",
-	"password": "usr"
+	"username": "admin",
+	"password": "pwd"
 }'
 ```
- 2- Create account
-```
+ 2- Create an account
+```shell script
 curl --request POST \
   --url http://localhost:8080/api/accounts \
-  --header 'authorization: TOKEN_EXTRACTED_FROM_HEADER_AFTER_LOGIN' \
+  --header 'authorization: TOKEN_TO_REPLACE' \
   --header 'content-type: application/json' \
   --data '{
   "balance": 0,
@@ -49,20 +52,8 @@ curl --request POST \
 }
 '
 ```
- 3- Create power of attorney
-```
-curl --request POST \
-  --url http://localhost:8080/api/powerofattorneys/authorize \
-  --header 'authorization: TOKEN_EXTRACTED_FROM_HEADER_AFTER_LOGIN' \
-  --header 'content-type: application/json' \
-  --data '{
-  "account_type": "SAVINGS_ACCOUNT",
-  "authorization": "WRITE",
-  "grantee_document": "50293847502"
-}'
-```
- 4- Login with the authorized user -> randall.gordon
-```
+ 3- Login with the user interested in give the power of attorney -> randall.gordon
+```shell script
 curl --request POST \
   --url http://localhost:8080/login \
   --header 'content-type: application/json' \
@@ -71,12 +62,38 @@ curl --request POST \
 	"password": "usr"
 }'
 ```
- 5- Request accounts the logged user (randall.gordon) has access for
+
+ 4- Create a power of attorney
+```shell script
+curl --request POST \
+  --url http://localhost:8080/api/powerofattorneys/authorize \
+  --header 'authorization: TOKEN_TO_REPLACE' \
+  --header 'content-type: application/json' \
+  --data '{
+  "account_type": "PAYMENT_ACCOUNT",
+  "authorization": "WRITE",
+  "grantee_document": "109327486"
+}'
 ```
+
+ 5- Login with the authorized user -> peggy.burns
+```shell script
+curl --request POST \
+  --url http://localhost:8080/login \
+  --header 'content-type: application/json' \
+  --data '{
+	"username": "peggy.burns",
+	"password": "usr"
+}'
+```
+
+
+6- Fetch accounts which the logged user (randall.gordon) has access for
+```shell script
 curl --request GET \
   --url http://localhost:8080/api/powerofattorneys \
-  --header 'authorization: TOKEN_EXTRACTED_FROM_HEADER_AFTER_LOGIN' \
-  --header 'content-type: application/json' \
+  --header 'authorization: TOKEN_TO_REPLACE' \
+  --header 'content-type: application/json'
 ```
 
 
@@ -92,4 +109,5 @@ curl --request GET \
 ### TODO
 - [ ] Encrypt user password.
 - [ ] Extract secrets from the code.
-- [ ] Deploy application in some container orchestration
+- [ ] Deploy application in some container orchestration.
+- [ ] Configure PMD and spotbugs

@@ -2,7 +2,7 @@ package nl.rabobank.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import nl.rabobank.security.exception.CurrentUserNotFound;
+import nl.rabobank.security.exception.CurrentUserNotFoundException;
 import nl.rabobank.user.usecase.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -53,7 +53,7 @@ public final class JwtUtils {
         .username(authentication.getPrincipal().toString())
         .build();
     }
-    throw new CurrentUserNotFound();
+    throw new CurrentUserNotFoundException();
   }
 
   private static String getUsername(final String token) {
