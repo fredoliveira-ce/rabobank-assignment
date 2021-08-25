@@ -24,8 +24,7 @@ docker-compose -f stack.yml up
 http://localhost:8080/swagger-ui.html
 
 ## Instructions
-<i class="fab fa-exclamation-triangle fa-fw" style="color:rgb(252,109,38); font-size:.85em" aria-hidden="true"></i>
-The user service would be implemented in other service, so there is an initial load in mongo-init/init.js. Check it out!
+> The user service would be implemented in other service, so there is an initial load in mongo-init/init.js. Check it out!
 
  1- Request a token
 ```shell script
@@ -49,8 +48,7 @@ curl --request POST \
   "holder_name": "Randall Gordon",
   "number": "5678",
   "type": "PAYMENT_ACCOUNT"
-}
-'
+}'
 ```
  3- Login with the user interested in give the power of attorney -> randall.gordon
 ```shell script
